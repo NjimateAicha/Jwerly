@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  
+
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Lodge</title>
+
+  <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Poppins:400,600,700&display=swap" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+</head>
+
+<body>
+  
+<body class="sub_page">
+
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="index.html">
+            <img id="logo1" src="images/logo.png" alt="">
+           
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+              <ul class="navbar-nav  ">
+                <li class="nav-item active">
+                  <Home class="nav-link"     href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link"  href="{% url 'about' %}"> About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link"   href="{% url 'jewellery' %}">Jewellery </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link"   href="{% url 'contact' %}">Contact us</a>
+                </li>
+                
+              </ul>
+
+            </div>
+            <div class="quote_btn-container ">
+              <a href="">
+                <img src="images/cart.png" alt="">
+                <div class="cart_number">
+                  0
+                </div>
+                
+              </a>
+              <form class="form-inline">
+                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+  </div>
+
+  <!-- contact section -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <div class="card mt-5">
+          <div class="card-body">
+            <h2 class="card-title text-center mb-4">Récapitulatif de la commande</h2>
+            <div id="order-details">
+              <!-- Les détails de la commande seront remplis par JavaScript -->
+            </div>
+            <div class="text-center mt-4">
+              <button class="btn btn-primary" id="confirm-payment">Confirmer le paiement</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const orderDetailsElement = document.getElementById('order-details');
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      // Affichez les détails de la commande sur la page de paiement
+      function displayOrderDetails() {
+        orderDetailsElement.innerHTML = '';
+        cart.forEach(item => {
+          const itemElement = document.createElement('div');
+          itemElement.classList.add('mb-3', 'border', 'p-3');
+          itemElement.innerHTML = `
+            <h5 class="mb-0">${item.name}</h5>
+            <p class="mb-1">Quantité: ${item.quantity}</p>
+            <p class="mb-1">Prix unitaire: ${item.price} $</p>
+          `;
+          orderDetailsElement.appendChild(itemElement);
+        });
+      }
+
+      displayOrderDetails();
+
+      // Ajoutez ici la logique pour confirmer le paiement
+      const confirmPaymentButton = document.getElementById('confirm-payment');
+      confirmPaymentButton.addEventListener('click', function() {
+        // Vous pouvez ajouter ici le code pour le traitement du paiement, par exemple rediriger vers une autre page ou effectuer des actions côté serveur
+        alert('Paiement confirmé !');
+      });
+    });
+  </script>
+</body>
+</html>

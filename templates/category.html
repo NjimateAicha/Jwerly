@@ -1,0 +1,345 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Lodge</title>
+
+  <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Poppins:400,600,700&display=swap" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+
+
+
+  <style>
+    .cart-popup {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 50px;
+      width: 300px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      z-index: 1000;
+    }
+
+    .cart-popup h2 {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .cart-item img {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    .cart-item-name {
+      flex-grow: 1;
+    }
+
+    .cart-item-quantity {
+      margin-left: 10px;
+      font-weight: bold;
+    }
+
+    .cart-popup-footer {
+      text-align: right;
+      margin-top: 20px;
+    }
+
+    .cart-popup-footer a {
+      background-color: #000;
+      color: #fff;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .cart-popup-footer a:hover {
+      background-color: #444;
+    }
+  </style>
+</head>
+
+<body class="sub_page">
+
+  <div class="hero_area">
+    <!-- header section starts -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand"  href="{% url 'index' %}">
+            <img id="logo1" src= "{% static  'images/logo.png'  %}" alt="">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+              <ul class="navbar-nav  ">
+                <li class="nav-item active">
+                  <a class="nav-link"     href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link"  href="{% url 'about' %}"> About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link"   href="{% url 'jewellery' %}">Jewellery </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link"   href="{% url 'contact' %}">Contact us</a>
+                </li>
+                
+              </ul>
+
+            </div>
+            <div class="quote_btn-container ">
+              <a  href="{% url 'panier' %}" id="cart-button">
+                <img src= "{% static  'images/cart.png'  %}"alt="">
+                <div class="cart_number">
+                  0
+                </div>
+              </a>
+              <div id="cart-popup" class="cart-popup">
+                <h2>Votre Panier</h2>
+                <div id="cart-items"></div>
+                <div class="cart-popup-footer">
+                  <a  href="" id="checkout-button">Payer tous les produits</a>
+                </div>
+              </div>
+              <form class="form-inline">
+                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+  </div>
+
+  
+  <section class="price_section layout_padding">
+    <div class="container">
+        <div class="heading_container">
+            <h2>{{ category.name }} Products</h2>
+        </div>
+        <div class="price_container">
+            {% for product in products %}
+            <div class="box">
+                <div class="name">
+                    <h6>{{ product.name }}</h6>
+                </div>
+                <div class="img-box">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                </div>
+                <div class="detail-box">
+                    <h5>${{ product.price }}</h5>
+                    <a href="{% url 'panier' %}">Buy Now</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- end price section -->
+</body>
+</html>
+  
+
+  <!-- end price section -->
+
+  <!-- info section -->
+  <section class="info_section ">
+    <div class="container">
+      <div class="info_container">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="info_logo">
+              <a href="">
+                <img id="logo1"  src= "{% static  'images/logo.png'  %}" alt="">
+                
+              </a>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="info_contact">
+              <a href="">
+                <img  src= "{% static  'images/location.png'  %}"  alt="">
+                <span>
+                  Address
+                </span>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="info_contact">
+              <a href="">
+                <img  src= "{% static  'images/phone.png'  %}" alt="">
+                <span>
+                  +01 1234567890
+                </span>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="info_contact">
+              <a href="">
+                <img  src= "{% static  'images/mail.png'  %}" alt="">
+                <span>
+                  demo@gmail.com
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="info_form">
+          <div class="d-flex justify-content-center">
+            <h5 class="info_heading">
+              Newsletter
+            </h5>
+          </div>
+          <form action="">
+            <div class="email_box">
+              <label for="email2">Enter Your Email</label>
+              <input type="text" id="email2">
+            </div>
+            <div>
+              <button>
+                subscribe
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="info_social">
+          <div class="d-flex justify-content-center">
+            <h5 class="info_heading">
+              Follow Us
+            </h5>
+          </div>
+          <div class="social_box">
+            <a href="">
+              <img  src= "{% static  'images/fb.png'  %}"  alt="">
+            </a>
+            <a href="">
+              <img  src= "{% static  'images/twitter.png'  %}" alt="">
+            </a>
+            <a href="">
+              <img   src= "{% static  'images/linkedin.png'  %}" alt="">
+            </a>
+            <a href="">
+              <img src= "{% static  'images/insta.png'  %}" alt="">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end info_section -->
+
+  <!-- footer section -->
+  <section class="container-fluid footer_section">
+    <p>
+      &copy; <span id="displayYear"></span> All Rights Reserved By
+      <a href="https://html.design/">Free Html Templates</a>
+    </p>
+  </section>
+  <!-- footer section --> 
+
+  <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script type="text/javascript" src=" {% static 'js/bootstrap.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+</body>
+
+</html>
+  <!-- end info_section -->
+
+ 
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const cartNumberElement = document.querySelector('.cart_number');
+      const addToCartButtons = document.querySelectorAll('.add-to-cart');
+      const cartButton = document.getElementById('cart-button');
+      const cartPopup = document.getElementById('cart-popup');
+      const cartItemsElement = document.getElementById('cart-items');
+
+      const cart = [];
+
+      addToCartButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const name = button.getAttribute('data-name');
+          const image = button.getAttribute('data-image');
+          
+          const existingItem = cart.find(item => item.name === name);
+
+          if (existingItem) {
+            existingItem.quantity++;
+          } else {
+            cart.push({ name, image, quantity: 1 });
+          }
+
+          updateCartNumber();
+        });
+      });
+
+      cartButton.addEventListener('click', () => {
+        cartPopup.style.display = cartPopup.style.display === 'block' ? 'none' : 'block';
+        displayCartItems();
+      });
+
+      function updateCartNumber() {
+        let totalItems = 0;
+        cart.forEach(item => totalItems += item.quantity);
+        cartNumberElement.textContent = totalItems;
+      }
+
+      function displayCartItems() {
+        cartItemsElement.innerHTML = '';
+        cart.forEach(item => {
+          const itemElement = document.createElement('div');
+          itemElement.classList.add('cart-item');
+          itemElement.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-quantity">Quantité: ${item.quantity}</div>
+          `;
+          cartItemsElement.appendChild(itemElement);
+        });
+      }
+    });
+  </script>
+ 
+  
+</body>
+
+</html>
