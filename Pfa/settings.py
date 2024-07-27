@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Ajoutez vos applications ici
     'main',
+    
 ]
 
 
@@ -68,6 +69,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.static',
+                
             ],
         },
     },
@@ -152,4 +154,24 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+
+
+# settings.py
+STRIPE_PUBLIC_KEY = 'pk_test_51IxCwzKTer1fyobEGJVvhvbp3jDbXX9cQVphO7eHGbWhNqspWotUfvinGX8vfmtbi5J1LxMVEbY4g7ZAk5lmGNUp00is7yBgSn'
+STRIPE_SECRET_KEY = 'sk_test_51IxCwzKTer1fyobEow1UBxRB3iiex3ajsyTZ6sNuKHewm6ab7WnAPsLppuyXB5DSy1OwytZCo8I6JcscYfxZco1I009l98eFGA'
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'njimateaicha@gmail.com'  # Mettez votre adresse e-mail Gmail ici
+EMAIL_HOST_PASSWORD = 'yzhw mmjp lxke lnrl'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
 

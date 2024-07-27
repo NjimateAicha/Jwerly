@@ -1,0 +1,331 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  
+
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Lodge</title>
+
+  <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Poppins:400,600,700&display=swap" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+  <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+</head>
+
+
+<body class="sub_page">
+
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand"  href="{% url 'index' %}">
+            <img id="logo1"src= "{% static  'images/logo.png'  %}" alt="">
+           
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+              <ul class="navbar-nav  ">
+                <li class="nav-item active">
+                  <a class="nav-link"     href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link"  href="{% url 'about' %}"> About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link"   href="{% url 'jewellery' %}">Jewellery </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link"   href="{% url 'contactUs' %}">Contact us</a>
+                </li>
+                
+              </ul>
+
+            </div>
+            <div class="quote_btn-container ">
+              <a  href="{% url 'panier' %}">
+                <img src= "{% static  'images/cart.png'  %}"  alt="">
+                <div class="cart_number">
+                  0
+                </div>
+                
+              </a>
+              <form class="form-inline">
+                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+  </div>
+
+  <!-- contact section -->
+
+  <section class="contact_section layout_padding">
+    <div class="design-box">
+      <img src= "{% static  'images/design-2.png'  %}" alt="">
+    </div>
+    <div class="container ">
+      <div class="">
+        <h2 class="">
+          Contact Us
+        </h2>
+      </div>
+
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          
+          <div id="successMessage" style="display:none;" class="alert alert-success mt-3">
+            Your message has been sent successfully!
+        </div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <form id="contact-form" method="post" action="{% url 'contact' %}">
+          {% csrf_token %}
+          <div>
+              <input type="text" name="name" placeholder="Name" required/>
+          </div>
+          <div>
+              <input type="text" id="subject" name="subject" placeholder="Subject" required/>
+          </div>
+          <div>
+              <input type="email" id="email" name="email" placeholder="Email" required/>
+          </div>
+          <div>
+              <input type="text" name="message" class="message-box" placeholder="Message" required/>
+          </div>
+          <div>
+              <input type="text" name="phone" placeholder="Phone" />
+          </div>
+          <button type="submit" class="btn btn-primary">Send</button>
+      </form>
+     
+  </div>
+   
+    
+      
+      
+        <div class="col-md-6">
+          <div class="map_container">
+            <div class="map-responsive">
+              <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Eiffel+Tower+Paris+France" width="600" height="300" frameborder="0" style="border:0; width: 100%; height:100%" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêcher la soumission normale du formulaire
+
+            // Effectuer une requête AJAX pour soumettre le formulaire
+            var formData = new FormData(this);
+
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Afficher l'alerte de succès
+                    document.getElementById('successMessage').style.display = 'block';
+                    // Réinitialiser le formulaire si nécessaire
+                    document.getElementById('contactForm').reset();
+                } else {
+                    // Gérer les erreurs si nécessaire
+                    console.error('Error submitting form');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    });
+</script>
+  <!-- end contact section -->
+
+ 
+  <!-- info section -->
+  <section class="info_section ">
+    <div class="container">
+      <div class="info_container">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="info_logo">
+              <a >
+                <img id="logo1"  src= "{% static  'images/logo.png'  %}" alt="">
+                
+              </a>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="info_contact">
+              <a href="https://www.google.com/maps/@34.2592137,-6.536307,10.25z?entry=ttu">
+                <img  src= "{% static  'images/location.png'  %}"  alt="">
+                <span>
+                  Address
+                </span>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="info_contact">
+              <a href="tel:+212621309024">
+                  <img src="{% static 'images/phone.png' %}" alt="Phone">
+                  <span>+212 621309024</span>
+              </a>
+          </div>
+          </div>
+          <div class="col-md-3">
+            <div class="info_contact">
+              <a href="mailto:njimataicha@gmail.com">
+                <img src="{% static 'images/mail.png' %}" alt="Email">
+                <span>njimataicha@gmail.com</span>
+            </a>
+            </div>
+          </div>
+        </div>
+      
+        <div class="info_social">
+          <div class="d-flex justify-content-center">
+            <h5 class="info_heading">
+              Follow Us
+            </h5>
+          </div>
+          <div class="social_box">
+            <a href="https://web.facebook.com/Aichakettani.50?_rdc=1&_rdr">
+              <img  src= "{% static  'images/fb.png'  %}"  alt="">
+            </a>
+            <a href="https://x.com/aicha_njimat?t=yMAv49yIQjzGBDfhmVeJ1Q&s=09">
+              <img  src= "{% static  'images/twitter.png'  %}" alt="">
+            </a>
+            <a href="https://www.linkedin.com/in/aicha-njimate-846aa5245/">
+              <img   src= "{% static  'images/linkedin.png'  %}" alt="">
+            </a>
+            <a href="https://www.instagram.com/kettani_aicha?igsh=MXFmaDBtenNmemJxeA==">
+              <img src= "{% static  'images/insta.png'  %}" alt="">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end info_section -->
+
+  <!-- footer section -->
+  <section class="container-fluid footer_section">
+    <p>
+      &copy; <span id="displayYear"></span> All Rights Reserved By
+      <a href="https://html.design/">Aicha Njimate  </a>
+    </p>
+  </section>
+  <!-- footer section --> 
+
+  <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script type="text/javascript" src=" {% static 'js/bootstrap.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+  <script>
+    window.watsonAssistantChatOptions = {
+      integrationID: "ce8203c6-0130-4b0a-94bb-4c712969e3a1", // The ID of this integration.
+      region: "us-south", // The region your integration is hosted in.
+      serviceInstanceID: "200babff-c3ac-4380-9122-44532f8f7349", // The ID of your service instance.
+      onLoad: async (instance) => { await instance.render(); }
+    };
+    setTimeout(function(){
+      const t=document.createElement('script');
+      t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+      document.head.appendChild(t);
+    });
+      </script>
+  <script>
+    var swiper = new Swiper('.swiper', {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+    });
+    
+function initSpeechRecognition() {
+const recognition = new webkitSpeechRecognition(); // Créez une instance de reconnaissance vocale
+recognition.lang = 'fr-FR'; // Définissez la langue de reconnaissance, par exemple français
+
+// Événement lorsqu'un résultat est reconnu
+recognition.onresult = function(event) {
+    const transcript = event.results[0][0].transcript.trim(); // Récupérez le texte reconnu
+    const searchInput = document.getElementById('search-input');
+    searchInput.value = transcript; // Mettez le texte reconnu dans l'input de recherche
+    document.getElementById('search-form').submit(); // Soumettez le formulaire de recherche
+};
+
+// Événement lorsqu'il y a une erreur
+recognition.onerror = function(event) {
+    console.error('Erreur de reconnaissance vocale:', event.error);
+};
+
+return recognition;
+}
+
+// Fonction pour démarrer la reconnaissance vocale
+function startSpeechRecognition() {
+const recognition = initSpeechRecognition();
+recognition.start(); // Démarrez la reconnaissance vocale
+}
+
+// Écoutez le clic sur l'icône de recherche pour démarrer la reconnaissance vocale
+const searchIcon = document.querySelector('.search svg');
+searchIcon.addEventListener('click', function() {
+startSpeechRecognition();
+});
+
+</script>
+</body>
+
+</html>

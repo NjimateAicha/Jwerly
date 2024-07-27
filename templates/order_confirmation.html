@@ -1,0 +1,298 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  
+
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Lodge</title>
+
+  <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Poppins:400,600,700&display=swap" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+  <style>
+    .confirmation_section {
+  background-color: #fff;
+  padding: 30px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.confirmation_section .container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.confirmation_section .confirmation_content {
+  text-align: center;
+}
+
+.confirmation_section h2 {
+  font-size: 2.5em;
+  color: #333;
+}
+
+.confirmation_section p {
+  font-size: 1.2em;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.confirmation_section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.confirmation_section ul li {
+  font-size: 1.1em;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.confirmation_section ul li img {
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+  </style>
+</head>
+
+<body class="sub_page">
+
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand"  href="{% url 'index' %}">
+            <img id="logo1"src= "{% static  'images/logo.png'  %}" alt="">
+            
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+              <ul class="navbar-nav  ">
+                <li class="nav-item active">
+                  <a class="nav-link"     href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link"  href="{% url 'about' %}"> About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link"   href="{% url 'jewellery' %}">Jewellery </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link"   href="{% url 'contactUs' %}">Contact us</a>
+                </li>
+                
+              </ul>
+
+            </div>
+            <div class="quote_btn-container ">
+              <a  href="{% url 'panier' %}">
+                <img src= "{% static  'images/cart.png'  %}"  alt="">
+                <div class="cart_number">
+                  0
+                </div>
+                
+              </a>
+              <form class="form-inline">
+                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+  </div>
+<!-- Exemple de template pour order_confirmation.html -->
+<!-- order_confirmation.html -->
+<section class="confirmation_section layout_padding">
+  <div class="container">
+    <div class="confirmation_content">
+      <h2>Order Confirmation</h2>
+      <p>Thank you for your order!</p>
+      <p>Your order details:</p>
+      <ul>
+        <li>Name: {{ order.name }}</li>
+        <li>Address: {{ order.address }}</li>
+        <li>Phone Number: {{ order.phone_number }}</li>
+        <li>Total Price: ${{ order.total_price }}</li>
+        <li>Ordered Items:</li>
+        <ul>
+          {% for item in order.order_items.all %}
+            <li>
+              <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="width: 50px; height: 50px;">
+              {{ item.quantity }} x {{ item.product.name }} - ${{ item.unit_price }}
+            </li>
+          {% endfor %}
+        </ul>
+      </ul>
+    </div>
+  </div>
+</section>
+
+  <!-- info section -->
+  <section class="info_section ">
+    <div class="container">
+      <div class="info_container">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="info_logo">
+              <a >
+                <img id="logo1"  src= "{% static  'images/logo.png'  %}" alt="">
+                
+              </a>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="info_contact">
+              <a href="https://www.google.com/maps/@34.2592137,-6.536307,10.25z?entry=ttu">
+                <img  src= "{% static  'images/location.png'  %}"  alt="">
+                <span>
+                  Address
+                </span>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="info_contact">
+              <a href="tel:+212621309024">
+                  <img src="{% static 'images/phone.png' %}" alt="Phone">
+                  <span>+212 621309024</span>
+              </a>
+          </div>
+          </div>
+          <div class="col-md-3">
+            <div class="info_contact">
+              <a href="mailto:njimataicha@gmail.com">
+                <img src="{% static 'images/mail.png' %}" alt="Email">
+                <span>njimataicha@gmail.com</span>
+            </a>
+            </div>
+          </div>
+        </div>
+      
+        <div class="info_social">
+          <div class="d-flex justify-content-center">
+            <h5 class="info_heading">
+              Follow Us
+            </h5>
+          </div>
+          <div class="social_box">
+            <a href="https://web.facebook.com/Aichakettani.50?_rdc=1&_rdr">
+              <img  src= "{% static  'images/fb.png'  %}"  alt="">
+            </a>
+            <a href="https://x.com/aicha_njimat?t=yMAv49yIQjzGBDfhmVeJ1Q&s=09">
+              <img  src= "{% static  'images/twitter.png'  %}" alt="">
+            </a>
+            <a href="https://www.linkedin.com/in/aicha-njimate-846aa5245/">
+              <img   src= "{% static  'images/linkedin.png'  %}" alt="">
+            </a>
+            <a href="https://www.instagram.com/kettani_aicha?igsh=MXFmaDBtenNmemJxeA==">
+              <img src= "{% static  'images/insta.png'  %}" alt="">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end info_section -->
+
+  <!-- footer section -->
+  <section class="container-fluid footer_section">
+    <p>
+      &copy; <span id="displayYear"></span> All Rights Reserved By
+      <a href="https://html.design/">Aicha Njimate  </a>
+    </p>
+  </section>
+  <!-- footer section --> 
+
+  <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script type="text/javascript" src=" {% static 'js/bootstrap.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+  <script>
+    window.watsonAssistantChatOptions = {
+      integrationID: "ce8203c6-0130-4b0a-94bb-4c712969e3a1", // The ID of this integration.
+      region: "us-south", // The region your integration is hosted in.
+      serviceInstanceID: "200babff-c3ac-4380-9122-44532f8f7349", // The ID of your service instance.
+      onLoad: async (instance) => { await instance.render(); }
+    };
+    setTimeout(function(){
+      const t=document.createElement('script');
+      t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+      document.head.appendChild(t);
+    });
+      </script>
+
+
+<script>
+  var swiper = new Swiper('.swiper', {
+      slidesPerView: 1,
+      spaceBetween: 10,
+      pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+      },
+  });
+  
+function initSpeechRecognition() {
+const recognition = new webkitSpeechRecognition(); // Créez une instance de reconnaissance vocale
+recognition.lang = 'fr-FR'; // Définissez la langue de reconnaissance, par exemple français
+
+// Événement lorsqu'un résultat est reconnu
+recognition.onresult = function(event) {
+  const transcript = event.results[0][0].transcript.trim(); // Récupérez le texte reconnu
+  const searchInput = document.getElementById('search-input');
+  searchInput.value = transcript; // Mettez le texte reconnu dans l'input de recherche
+  document.getElementById('search-form').submit(); // Soumettez le formulaire de recherche
+};
+
+// Événement lorsqu'il y a une erreur
+recognition.onerror = function(event) {
+  console.error('Erreur de reconnaissance vocale:', event.error);
+};
+
+return recognition;
+}
+
+// Fonction pour démarrer la reconnaissance vocale
+function startSpeechRecognition() {
+const recognition = initSpeechRecognition();
+recognition.start(); // Démarrez la reconnaissance vocale
+}
+
+// Écoutez le clic sur l'icône de recherche pour démarrer la reconnaissance vocale
+const searchIcon = document.querySelector('.search svg');
+searchIcon.addEventListener('click', function() {
+startSpeechRecognition();
+});
+
+</script>
+</body>
+
+</html>

@@ -115,7 +115,7 @@
                   <a class="nav-link"   href="{% url 'jewellery' %}">Jewellery </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link"   href="{% url 'contact' %}">Contact us</a>
+                  <a class="nav-link"   href="{% url 'contactUs' %}">Contact us</a>
                 </li>
                 
               </ul>
@@ -145,35 +145,31 @@
     </header>
     <!-- end header section -->
   </div>
-
-  
-
-  <!-- price section -->
   <section class="price_section layout_padding">
     <div class="container">
-      <div class="heading_container">
-        <h2>Our Jewellery Price</h2>
-      </div>
-      <div class="price_container">
-        {% for product in all_products %}
-        <div class="box">
-          <div class="name">
-            <h6>{{ product.name }}</h6>
-          </div>
-          <div class="img-box">
-            <img src="{{ product.image.url }}" alt="{{ product.name }}">
-          </div>
-          <div class="detail-box">
-            <h5>${{ product.price }}</h5>
-            <a href="{% url 'panier' %}">Add to Cart</a>
-          </div>
+        <div class="heading_container">
+            <h2>Our Jewellery Price</h2>
         </div>
-        {% endfor %}
-      </div>
-      
+     
+        </div>
+        <div class="price_container">
+            {% for product in all_products %}
+            <div class="box">
+                <div class="name">
+                    <h6>{{ product.name }}</h6>
+                </div>
+                <div class="img-box">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                </div>
+                <div class="detail-box">
+                    <h5>${{ product.price }}</h5>
+                    <a href="{% url 'add_to_cart' product.id %}">Add To Cart</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
-  </section>
-  
+</section>
 
   <!-- end price section -->
 
@@ -184,7 +180,7 @@
         <div class="row">
           <div class="col-md-3">
             <div class="info_logo">
-              <a href="">
+              <a >
                 <img id="logo1"  src= "{% static  'images/logo.png'  %}" alt="">
                 
               </a>
@@ -192,7 +188,7 @@
           </div>
           <div class="col-md-3">
             <div class="info_contact">
-              <a href="">
+              <a href="https://www.google.com/maps/@34.2592137,-6.536307,10.25z?entry=ttu">
                 <img  src= "{% static  'images/location.png'  %}"  alt="">
                 <span>
                   Address
@@ -202,43 +198,22 @@
           </div>
           <div class="col-md-3">
             <div class="info_contact">
-              <a href="">
-                <img  src= "{% static  'images/phone.png'  %}" alt="">
-                <span>
-                  +01 1234567890
-                </span>
+              <a href="tel:+212621309024">
+                  <img src="{% static 'images/phone.png' %}" alt="Phone">
+                  <span>+212 621309024</span>
               </a>
-            </div>
+          </div>
           </div>
           <div class="col-md-3">
             <div class="info_contact">
-              <a href="">
-                <img  src= "{% static  'images/mail.png'  %}" alt="">
-                <span>
-                  demo@gmail.com
-                </span>
-              </a>
+              <a href="mailto:njimataicha@gmail.com">
+                <img src="{% static 'images/mail.png' %}" alt="Email">
+                <span>njimataicha@gmail.com</span>
+            </a>
             </div>
           </div>
         </div>
-        <div class="info_form">
-          <div class="d-flex justify-content-center">
-            <h5 class="info_heading">
-              Newsletter
-            </h5>
-          </div>
-          <form action="">
-            <div class="email_box">
-              <label for="email2">Enter Your Email</label>
-              <input type="text" id="email2">
-            </div>
-            <div>
-              <button>
-                subscribe
-              </button>
-            </div>
-          </form>
-        </div>
+      
         <div class="info_social">
           <div class="d-flex justify-content-center">
             <h5 class="info_heading">
@@ -246,16 +221,16 @@
             </h5>
           </div>
           <div class="social_box">
-            <a href="">
+            <a href="https://web.facebook.com/Aichakettani.50?_rdc=1&_rdr">
               <img  src= "{% static  'images/fb.png'  %}"  alt="">
             </a>
-            <a href="">
+            <a href="https://x.com/aicha_njimat?t=yMAv49yIQjzGBDfhmVeJ1Q&s=09">
               <img  src= "{% static  'images/twitter.png'  %}" alt="">
             </a>
-            <a href="">
+            <a href="https://www.linkedin.com/in/aicha-njimate-846aa5245/">
               <img   src= "{% static  'images/linkedin.png'  %}" alt="">
             </a>
-            <a href="">
+            <a href="https://www.instagram.com/kettani_aicha?igsh=MXFmaDBtenNmemJxeA==">
               <img src= "{% static  'images/insta.png'  %}" alt="">
             </a>
           </div>
@@ -270,7 +245,7 @@
   <section class="container-fluid footer_section">
     <p>
       &copy; <span id="displayYear"></span> All Rights Reserved By
-      <a href="https://html.design/">Free Html Templates</a>
+      <a href="https://html.design/">Aicha Njimate  </a>
     </p>
   </section>
   <!-- footer section --> 
@@ -338,6 +313,63 @@
       }
     });
   </script>
+  <script>
+    window.watsonAssistantChatOptions = {
+      integrationID: "ce8203c6-0130-4b0a-94bb-4c712969e3a1", // The ID of this integration.
+      region: "us-south", // The region your integration is hosted in.
+      serviceInstanceID: "200babff-c3ac-4380-9122-44532f8f7349", // The ID of your service instance.
+      onLoad: async (instance) => { await instance.render(); }
+    };
+    setTimeout(function(){
+      const t=document.createElement('script');
+      t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+      document.head.appendChild(t);
+    });
+      </script>
+
+<script>
+  var swiper = new Swiper('.swiper', {
+      slidesPerView: 1,
+      spaceBetween: 10,
+      pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+      },
+  });
+  
+function initSpeechRecognition() {
+const recognition = new webkitSpeechRecognition(); // Créez une instance de reconnaissance vocale
+recognition.lang = 'fr-FR'; // Définissez la langue de reconnaissance, par exemple français
+
+// Événement lorsqu'un résultat est reconnu
+recognition.onresult = function(event) {
+  const transcript = event.results[0][0].transcript.trim(); // Récupérez le texte reconnu
+  const searchInput = document.getElementById('search-input');
+  searchInput.value = transcript; // Mettez le texte reconnu dans l'input de recherche
+  document.getElementById('search-form').submit(); // Soumettez le formulaire de recherche
+};
+
+// Événement lorsqu'il y a une erreur
+recognition.onerror = function(event) {
+  console.error('Erreur de reconnaissance vocale:', event.error);
+};
+
+return recognition;
+}
+
+// Fonction pour démarrer la reconnaissance vocale
+function startSpeechRecognition() {
+const recognition = initSpeechRecognition();
+recognition.start(); // Démarrez la reconnaissance vocale
+}
+
+// Écoutez le clic sur l'icône de recherche pour démarrer la reconnaissance vocale
+const searchIcon = document.querySelector('.search svg');
+searchIcon.addEventListener('click', function() {
+startSpeechRecognition();
+});
+
+</script>
  
   
 </body>
