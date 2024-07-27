@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Ce projet est un site e-commerce développé avec Django, permettant la vente de bijoux en ligne. Il a été réalisé par Aicha Njimate et [Nom du collègue] dans le cadre de notre projet de fin d'études.
+Ce projet est un site e-commerce développé avec Django, permettant la vente de bijoux en lignedans le cadre de notre projet de fin d'études.
 
 ## Fonctionnalités
 
